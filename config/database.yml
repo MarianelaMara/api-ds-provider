@@ -2,8 +2,8 @@ default: &default
  adapter: postgresql
  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
  host: database
- username: postgres
- password: postgres
+ username: provider
+ password: qaWlC3hexA7pfXRSGXto3nbnBs3qkWyN
  port: 5432
  timeout: 5000
 

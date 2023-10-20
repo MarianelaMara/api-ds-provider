@@ -19,13 +19,13 @@ services:
     environment:
       RAILS_ENV: development
       #RAILS_SERVE_STATIC_FILES: true
-      DATABASE_USER: postgres
-      DATABASE_PASS: postgres
+      DATABASE_USER: provider
+      DATABASE_PASS: provider
       DATABASE_HOST: database
       DATABASE_NAME: providers_db
       HOST: api-rest-provider.onrender.com
       SETUP_DB: "true"
-      DATABASE_URL: "postgres://postgres:postgres@localhost/providers_db"
+     # DATABASE_URL: "postgres://postgres:postgres@localhost/providers_db"
       # HOST_URL: http:/host.com
     tty: true
     stdin_open: true
