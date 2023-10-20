@@ -1,7 +1,7 @@
 default: &default
  adapter: postgresql
  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
- host: database
+ host: postgres://provider:qaWlC3hexA7pfXRSGXto3nbnBs3qkWyN@dpg-ckpfur8ujous73dhm8p0-a.oregon-postgres.render.com/provider_db
  username: provider
  password: qaWlC3hexA7pfXRSGXto3nbnBs3qkWyN
  port: 5432
