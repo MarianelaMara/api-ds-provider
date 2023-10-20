@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (5.5.0)
+      concurrent-ruby (~> 1.0)
     actioncable (7.0.8)
       actionpack (= 7.0.8)
       activesupport (= 7.0.8)
@@ -66,6 +68,8 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    addressable (2.8.5)
+      public_suffix (>= 2.0.2, < 6.0)
     bcrypt (3.1.19)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
@@ -76,6 +80,7 @@ GEM
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    diff-lcs (1.5.0)
     erubi (1.12.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -85,6 +90,8 @@ GEM
     irb (1.8.1)
       rdoc
       reline (>= 0.3.8)
+    json-schema (3.0.0)
+      addressable (>= 2.8)
     jwt (2.7.1)
     loofah (2.21.4)
       crass (~> 1.0.2)
@@ -114,6 +121,7 @@ GEM
     pg (1.5.4)
     psych (4.0.6)
       stringio
+    public_suffix (5.0.3)
     puma (5.6.7)
       nio4r (~> 2.0)
     racc (1.7.1)
@@ -153,7 +161,33 @@ GEM
       psych (>= 4.0.0)
     reline (0.3.9)
       io-console (~> 0.5)
-    sqlite3 (1.6.7-x86_64-linux)
+    rspec-core (3.12.2)
+      rspec-support (~> 3.12.0)
+    rspec-expectations (3.12.3)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.12.0)
+    rspec-mocks (3.12.6)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.12.0)
+    rspec-rails (6.0.3)
+      actionpack (>= 6.1)
+      activesupport (>= 6.1)
+      railties (>= 6.1)
+      rspec-core (~> 3.12)
+      rspec-expectations (~> 3.12)
+      rspec-mocks (~> 3.12)
+      rspec-support (~> 3.12)
+    rspec-support (3.12.1)
+    rswag-api (2.11.0)
+      railties (>= 3.1, < 7.2)
+    rswag-specs (2.11.0)
+      activesupport (>= 3.1, < 7.2)
+      json-schema (>= 2.2, < 4.0)
+      railties (>= 3.1, < 7.2)
+      rspec-core (>= 2.14)
+    rswag-ui (2.11.0)
+      actionpack (>= 3.1, < 7.2)
+      railties (>= 3.1, < 7.2)
     stringio (3.0.8)
     thor (1.2.2)
     timeout (0.4.0)
@@ -168,6 +202,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  aasm
   bcrypt (~> 3.1.7)
   bootsnap
   debug
@@ -176,7 +211,10 @@ DEPENDENCIES
   psych (~> 4.0.0)
   puma (~> 5.0)
   rails (~> 7.0.8)
-  sqlite3 (~> 1.4)
+  rspec-rails
+  rswag-api
+  rswag-specs
+  rswag-ui
   tzinfo-data
 
 RUBY VERSION

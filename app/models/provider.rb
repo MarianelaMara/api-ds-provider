@@ -5,7 +5,9 @@ class Provider < ApplicationRecord
 
     validates_uniqueness_of :name
 
-    def as_json(options = {})
-        super(options.merge( { except: [:created_at, :updated_at] }))
+
+    def as_json(options = {}) 
+        super(options.merge( { include: { provisions: { include: { material: { only: :name } }, except: [:created_at, :updated_at, :material_id] } }, except: [:created_at, :updated_at]})) 
     end
+      
 end

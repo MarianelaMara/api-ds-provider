@@ -15,7 +15,7 @@ class ProvidersController < ApplicationController
       @providers = Provider.includes(:provisions).joins(:provisions).where("provisions.material_id = ? AND provisions.price <= ? AND provisions.delivery_time <= ? AND provisions.stock >= ?", material_id, price, (date - Date.today).to_i, stock)
     
       # Renderizar la respuesta en formato JSON
-      render_success({ provedores: @providers.as_json(include: :provisions, except: [:created_at, :updated_at])}, {})
+      render_success({ provedores: @providers.as_json}, {})
     end
 
 

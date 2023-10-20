@@ -24,31 +24,17 @@ Provider.create(name: "Metalix", country: "China", address: "No. 8 Huaxia Road",
 Provider.create(name: "Plastix", country: "Brasil", address: "Rua das Flores, 123", city: "São Paulo")
 
 
-Maker.create(name: "Muebles S.A.", country: "Argentina", address: "Av. San Martín 1234", city: "City Bell")
-Maker.create(name: "Glassy", country: "España", address: "Calle Mayor 5678", city: "Madrid")
-Maker.create(name: "Mparts S.R.L.", country: "Argentina", address: "Calle 25 de Mayo 5678", city: "La Plata")
-Maker.create(name: "Elrix", country: "China", address: "No. 8 Huaxia Road", city: "Shanghai")
-Maker.create(name: "Ccos S.A.", country: "Argentina", address: "Av. San Martín 1234", city: "City Bell")
-Maker.create(name: "Tand", country: "Estados Unidos", address: "100 Main Street", city: "New York")
-Maker.create(name: "Bic S.R.L.", country: "Argentina", address: "Calle 25 de Mayo 5678", city: "La Plata")
-Maker.create(name: "Trix", country: "China", address: "No. 8 Huaxia Road", city: "Shanghai")
-Maker.create(name: "Vid S.A.", country: "Argentina", address: "Ruta 2 Km. 35", city: "Berazategui")
-Maker.create(name: "Jewelix", country: "Italia", address: "Via Roma 1234", city: "Roma")
+Maker.create(name: "Muebles S.A.", country: "Argentina", address: "Av. San Martín 1234", city: "City Bell", price: 100.0)
+Maker.create(name: "Glassy", country: "España", address: "Calle Mayor 5678", city: "Madrid", price:400.0 )
+Maker.create(name: "Mparts S.R.L.", country: "Argentina", address: "Calle 25 de Mayo 5678", city: "La Plata", price:400.0 )
+Maker.create(name: "Elrix", country: "China", address: "No. 8 Huaxia Road", city: "Shanghai",price:400.0 )
+Maker.create(name: "Ccos S.A.", country: "Argentina", address: "Av. San Martín 1234", city: "City Bell", price:600.0 )
+Maker.create(name: "Tand", country: "Estados Unidos", address: "100 Main Street", city: "New York", price:500.0 )
+Maker.create(name: "Bic S.R.L.", country: "Argentina", address: "Calle 25 de Mayo 5678", city: "La Plata", price:400.0 )
+Maker.create(name: "Trix", country: "China", address: "No. 8 Huaxia Road", city: "Shanghai", price:400.0 )
+Maker.create(name: "Vid S.A.", country: "Argentina", address: "Ruta 2 Km. 35", city: "Berazategui", price:800.0 )
+Maker.create(name: "Jewelix", country: "Italia", address: "Via Roma 1234", city: "Roma", price:900.0 )
 
-# Ejemplo 1: Crear un calendario para el año 2023 con algunos días libres y reservados para el proveedor de fabricación de muebles de madera
-Calendar.create(maker_id: 1, year: 2023, free_dates: ["2023-01-01", "2023-01-02", "2023-01-03", "2023-01-04", "2023-01-05"], booked_dates: ["2023-01-06", "2023-01-07", "2023-01-08", "2023-01-09", "2023-01-10"])
-# Ejemplo 2: Crear un calendario para el año 2024 con algunos días libres y reservados para el proveedor de fabricación 2
-Calendar.create(maker_id: 2, year: 2024, free_dates: ["2024-02-01", "2024-02-02", "2024-02-03", "2024-02-04", "2024-02-05"], booked_dates: ["2024-02-06", "2024-02-07", "2024-02-08", "2024-02-09", "2024-02-10"])
-# Ejemplo 3: Crear un calendario para el año 2025 con algunos días libres y reservados para el proveedor de ensamblado de piezas metálicas
-Calendar.create(maker_id: 3, year: 2025, free_dates: ["2025-03-01", "2025-03-02", "2025-03-03", "2025-03-04", "2025-03-05"], booked_dates: ["2025-03-06", "2025-03-07", "2025-03-08", "2025-03-09", "2025-03-10"])
-
-##calendario = Calendario.new(maker_id: 1, year: 2023)
-##dia = Date.new(2023, 2, 1) # Primer día de febrero
-##while dia <= Date.new(2023, 12, 31) # Último día de diciembre
-##  calendario.free_dates << dia # Agregar el día al array de free_dates
-##  dia = dia + 1 # Incrementar el día en uno
-##end
-##calendario.save
 
 # Ejemplo 1: Crear una provision de madera de pino por 100 pesos el metro cúbico, con 50 unidades en stock y 10 días de entrega
 Provision.create(provider_id: 1, material_id: 1, price: 100.0, stock: 50, delivery_time: 10)

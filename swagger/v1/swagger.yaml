@@ -1,0 +1,1153 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "components": {
+    " securitySchemes": {
+      "BearerAuth": "security_scheme_bearer",
+      "TokenAuth": "security_scheme_token"
+    },
+    "schemas": {
+      "StatusOk": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string",
+            "example": {
+            }
+          },
+          "metadata": {
+            "type": "string",
+            "example": {
+            }
+          },
+          "status": {
+            "type": "integer",
+            "example": 200
+          }
+        }
+      },
+      "Status201": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string",
+            "example": {
+            }
+          },
+          "metadata": {
+            "type": "string",
+            "example": {
+            }
+          },
+          "status": {
+            "type": "integer",
+            "example": 201
+          }
+        }
+      },
+      "Status401": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "invalid_token"
+          },
+          "detail": {
+            "type": "string",
+            "example": ""
+          },
+          "status": {
+            "type": "integer",
+            "example": 401
+          }
+        }
+      },
+      "Status403": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "not_authorized"
+          },
+          "detail": {
+            "type": "string",
+            "example": ""
+          },
+          "status": {
+            "type": "integer",
+            "example": 403
+          }
+        }
+      },
+      "Status404": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "record_not_found"
+          },
+          "detail": {
+            "type": "string",
+            "example": ""
+          },
+          "status": {
+            "type": "integer",
+            "example": 404
+          }
+        }
+      },
+      "Status422": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "unprocessable entity"
+          },
+          "detail": {
+            "type": "string",
+            "example": ""
+          },
+          "status": {
+            "type": "integer",
+            "example": 422
+          }
+        }
+      },
+      "Status500": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "internal server error"
+          },
+          "detail": {
+            "type": "string",
+            "example": ""
+          },
+          "status": {
+            "type": "integer",
+            "example": 500
+          }
+        }
+      },
+      "bookingCreate": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 3
+          },
+          "provider_type": {
+            "type": "string",
+            "example": "Maker"
+          },
+          "provider_id": {
+            "type": "integer",
+            "example": 1
+          },
+          "start_date": {
+            "type": "string",
+            "example": "2023-01-02"
+          },
+          "end_date": {
+            "type": "string",
+            "example": "2023-01-25"
+          },
+          "price": {
+            "type": "decimal",
+            "example": 400000
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Cantidad reservada en caso de ser de material",
+            "example": 30,
+            "nullable": true
+          },
+          "material_id": {
+            "type": "integer",
+            "description": "id del material si es una reserva de material",
+            "example": 3,
+            "nullable": true
+          },
+          "aasm_state": {
+            "type": "string",
+            "description": "Estado de la reserva",
+            "example": "pending"
+          },
+          "delivery_place": {
+            "type": "string",
+            "description": "Direccion a entregar la reserva en caso de ser de un material",
+            "example": "Rua das Flores, 123",
+            "nullable": true
+          }
+        }
+      },
+      "booking": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 3
+          },
+          "provider_type": {
+            "type": "string",
+            "example": "Maker"
+          },
+          "provider_id": {
+            "type": "integer",
+            "example": 1
+          },
+          "start_date": {
+            "type": "string",
+            "example": "2023-01-02"
+          },
+          "end_date": {
+            "type": "string",
+            "example": "2023-01-25"
+          },
+          "price": {
+            "type": "decimal",
+            "example": 400000
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "Cantidad reservada en caso de ser de material",
+            "example": 30,
+            "nullable": true
+          },
+          "material_id": {
+            "type": "integer",
+            "description": "id del material si es una reserva de material",
+            "example": 3,
+            "nullable": true
+          },
+          "aasm_state": {
+            "type": "string",
+            "description": "Estado de la reserva",
+            "example": "pending"
+          },
+          "delivery_place": {
+            "type": "string",
+            "description": "Direccion a entregar la reserva en caso de ser de un material",
+            "example": "Rua das Flores, 123",
+            "nullable": true
+          }
+        }
+      },
+      "bookingShow": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "description": "Los datos de la respuesta",
+            "properties": {
+              "reserva": {
+                "$ref": "#/components/schemas/booking"
+              }
+            }
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Los metadatos de la respuesta"
+          },
+          "status": {
+            "type": "string",
+            "description": "El código de estado de la respuesta",
+            "example": "200"
+          }
+        }
+      },
+      "bookingList": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "description": "Los datos de la respuesta",
+            "properties": {
+              "Reservas": {
+                "type": "array",
+                "description": "Una lista de reservas",
+                "items": {
+                  "$ref": "#/components/schemas/booking"
+                }
+              }
+            }
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Los metadatos de la respuesta"
+          },
+          "status": {
+            "type": "string",
+            "description": "El código de estado de la respuesta"
+          }
+        }
+      },
+      "provision": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 3
+          },
+          "provider_id": {
+            "type": "integer",
+            "example": 1
+          },
+          "price": {
+            "type": "decimal",
+            "example": 400000
+          },
+          "stock": {
+            "type": "integer",
+            "example": 50
+          },
+          "delivery_time": {
+            "type": "integer",
+            "example": 20
+          },
+          "material": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "Maker"
+              }
+            }
+          }
+        }
+      },
+      "provider": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 3
+          },
+          "name": {
+            "type": "string",
+            "example": "Maderas S.A."
+          },
+          "country": {
+            "type": "string",
+            "example": "Argentina"
+          },
+          "address": {
+            "type": "string",
+            "example": "Av. San Martín 1234"
+          },
+          "city": {
+            "type": "string",
+            "example": "City Bell"
+          },
+          "provisions": {
+            "type": "array",
+            "description": "Una lista de provedores y los materiales que ofrecen",
+            "items": {
+              "$ref": "#/components/schemas/provision"
+            }
+          }
+        }
+      },
+      "providerList": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "description": "Los datos de la respuesta",
+            "properties": {
+              "Provedores ": {
+                "type": "array",
+                "description": "Una lista de provedores y los materiales que ofrecen",
+                "items": {
+                  "$ref": "#/components/schemas/provider"
+                }
+              }
+            }
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Los metadatos de la respuesta"
+          },
+          "status": {
+            "type": "string",
+            "description": "El código de estado de la respuesta"
+          }
+        }
+      },
+      "providerFilter": {
+        "properties": {
+          "material": {
+            "type": "string",
+            "example": "pino"
+          },
+          "stock": {
+            "type": "integer",
+            "example": 400
+          },
+          "price": {
+            "type": "decimal",
+            "example": 400
+          },
+          "date": {
+            "type": "string",
+            "example": "2023-01-02"
+          }
+        }
+      },
+      "makerFilter": {
+        "properties": {
+          "start_date": {
+            "type": "string",
+            "example": "2023-01-02"
+          },
+          "end_date": {
+            "type": "string",
+            "example": "2023-01-30"
+          }
+        }
+      },
+      "maker": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 3
+          },
+          "name": {
+            "type": "string",
+            "example": "Maderas S.A."
+          },
+          "country": {
+            "type": "string",
+            "example": "Argentina"
+          },
+          "address": {
+            "type": "string",
+            "example": "Av. San Martín 1234"
+          },
+          "city": {
+            "type": "string",
+            "example": "City Bell"
+          },
+          "price": {
+            "type": "decimal",
+            "example": 4000
+          }
+        }
+      },
+      "makerList": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "description": "Los datos de la respuesta",
+            "properties": {
+              "makers": {
+                "type": "array",
+                "description": "Una lista de provedores de fabricacion ",
+                "items": {
+                  "$ref": "#/components/schemas/maker"
+                }
+              }
+            }
+          },
+          "metadata": {
+            "type": "object",
+            "description": "Los metadatos de la respuesta"
+          },
+          "status": {
+            "type": "string",
+            "description": "El código de estado de la respuesta"
+          }
+        }
+      },
+      "login": {
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "example@email.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "123456"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "summary": "login authentication",
+        "description": "Devuelve un token de autenticación en el header Authorization",
+        "parameters": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "headers": {
+              "Authorization": {
+                "type": "string",
+                "description": "Token de usuario"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusOk"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "record_not_found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status404"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "unprocessable entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status422"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status500"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/login"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bookings": {
+      "get": {
+        "summary": "list bookings",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "BearerAuth": [
+
+            ]
+          }
+        ],
+        "description": "Lista todas las reservas del sistema",
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/bookingList"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "invalid_token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "not_authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status403"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "unprocessable entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status422"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status500"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "create booking",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "BearerAuth": [
+
+            ]
+          }
+        ],
+        "description": "Crea una reserva que puede ser de un material o de un espacio de fabricación, en caso de ser una reserva de material se chequea que el stock sea suficiente y en caso de ser de lugar de fabricación se chequea que las fechas esten disponibles. No todos  los parametros son obligatorios ya que dependen del tipo de reserva ",
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status201"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "invalid_token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "not_authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "record_not_found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status404"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "unprocessable entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status422"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status500"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/bookingCreate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bookings/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "summary": "show booking",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "BearerAuth": [
+
+            ]
+          }
+        ],
+        "description": "Permite ver los datos de una reserva",
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/bookingShow"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "invalid_token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "not_authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "record_not_found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status404"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "unprocessable entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status422"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status500"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/makers/filter": {
+      "get": {
+        "summary": "filter maker",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "BearerAuth": [
+
+            ]
+          }
+        ],
+        "description": "Devuelve una lista de provedores de lugares de fabricacion  que tienen disponible las fechas del rando que se paso como parametro ",
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/makerList"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "invalid_token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "not_authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "record_not_found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status404"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "unprocessable entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status422"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status500"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/makerFilter"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/makers": {
+      "get": {
+        "summary": "list makers",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "BearerAuth": [
+
+            ]
+          }
+        ],
+        "description": "Lista todos los lugares de fabricacion del sistema",
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/makerList"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "invalid_token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "not_authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status403"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "unprocessable entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status422"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status500"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/providers": {
+      "get": {
+        "summary": "list providers",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "BearerAuth": [
+
+            ]
+          }
+        ],
+        "description": "Lista todos los proveedores de materiales con los materiales que ofrecen ",
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/providerList"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "invalid_token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "not_authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status403"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "unprocessable entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status422"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status500"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/providers/filter": {
+      "get": {
+        "summary": "filter provider",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "BearerAuth": [
+
+            ]
+          }
+        ],
+        "description": "Devuelve una lista de provedores que tienen disponible el stock suficiente del material en un precio menor o igual al ingresado y su estrega se estima antes de la fecha ingresada",
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/providerList"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "invalid_token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "not_authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "record_not_found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status404"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "unprocessable entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status422"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status500"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/providerFilter"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://providers.com",
+      "variables": {
+        "defaultHost": {
+          "default": "localhost"
+        }
+      }
+    }
+  ]
+}
