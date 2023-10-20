@@ -15,4 +15,4 @@ COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 
 # Exponer el puerto 3000 para que sea accesible desde fuera del contenedor
-EXPOSE 3000
+#XPOSE 3000

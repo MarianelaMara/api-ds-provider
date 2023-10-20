@@ -25,6 +25,7 @@ services:
       DATABASE_NAME: providers_db
       HOST: api-rest-provider.onrender.com
       SETUP_DB: "true"
+      DATABASE_URL: "postgres://postgres:postgres"
       # HOST_URL: http:/host.com
     tty: true
     stdin_open: true
