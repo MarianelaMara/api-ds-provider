@@ -13,8 +13,8 @@ development:
 
 test:
   <<: *default
-  database: test_db
+  database: providers_db
 
 production:
   <<: *default
-  database: prod_db
+  database: providers_db
