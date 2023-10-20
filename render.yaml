@@ -1,0 +1,18 @@
+services:
+  
+type: web
+  name: rails-app
+  env: docker
+  dockerfilePath: ./Dockerfile # or the path to your Dockerfile
+  envVars:
+key: RAILS_MASTER_KEY
+    fromRepo: true
+key: SETUP_DB
+  value: true # or false depending on whether you want to run db:create db:migrate db:seed on every deploy
+routes:
+path: /
+
+databases:
+  
+name: rails-db
+  plan: starter # or the plan you are using
