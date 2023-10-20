@@ -9,12 +9,12 @@ default: &default
 
 development:
   <<: *default
-  database: providers_db
+  database: provider_db
 
 test:
   <<: *default
-  database: providers_db
+  database: provider_db
 
 production:
   <<: *default
-  database: providers_db
+  database: provider_db
