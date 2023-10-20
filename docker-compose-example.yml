@@ -12,11 +12,7 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
   app:
-    build: 
-        context: .
-        args:
-          - RAILS_ENV=production
-          - SECRET_KEY_BASE=$(openssl rand -hex 64)
+    build: .
     command: "entrypoint.sh" 
     depends_on:
       - database
@@ -27,7 +23,7 @@ services:
       DATABASE_PASS: postgres
       DATABASE_HOST: database
       DATABASE_NAME: providers_db
-      HOST_URL: https://api-rest-provider.onrender.com/
+      HOST_URL: http://localhost:3000/
       #SETUP_DB: "true"
       # HOST_URL: http:/host.com
     tty: true
