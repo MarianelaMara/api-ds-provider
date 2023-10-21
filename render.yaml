@@ -9,6 +9,9 @@ key: RAILS_MASTER_KEY
     fromRepo: true
 key: SETUP_DB
   value: true # or false depending on whether you want to run db:create db:migrate db:seed on every deploy
+key: DATABASE_URL # esta es la variable de entorno que contiene la URL de la base de datos 
+  fromDatabase: name: provider_db # este es el nombre de la base de datos que se crea en Render 
+  type: postgres # este es el tipo de base de datos que se usa en Render 
 routes:
 path: /
 
