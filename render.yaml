@@ -14,5 +14,5 @@ path: /
 
 databases:
   
-name: rails-db
+name: provider_db
   plan: starter # or the plan you are using
