@@ -3,8 +3,8 @@ require "jwt"
 module JsonWebToken
 
     extend ActiveSupport::Concern
-
-    SECRET_KEY = Rails.application.secrets.secret_key_base
+    SECRET_KEY = Rails.application.credentials.fetch(:secret_key_base) #Rails.application.secrets.secret_key_base
+    #SECRET_KEY = Rails.application.secrets.secret_key_base
 
     def jwt_encode(payload)
       #  payload[:exp] = exp.to_i
