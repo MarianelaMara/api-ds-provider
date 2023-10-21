@@ -17,7 +17,7 @@ module JsonWebToken
                 decoded = JWT.decode(token, SECRET_KEY)[0]
                 HashWithIndifferentAccess.new decoded
             rescue JWT::VerificationError, JWT::DecodeError
-                decoded = "Token not found"
+                decoded = "Token not found decoded"
             end
         else
             decoded = "Token not found"
