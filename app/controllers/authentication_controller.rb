@@ -8,7 +8,7 @@ class AuthenticationController < ApplicationController
         if @user&.authenticate(params[:password])
             token = jwt_encode(user_id: @user.id)
             response.set_header('Authorization', token) # Establece el token en la cabecera
-            render_success({ message: "Login exitoso"}, {})
+            render_success({ token: token}, {})
         else
             render_error("Error", "Usuario o clave invalido", INTERNAL_SERVER_ERROR)
         end
