@@ -5,12 +5,12 @@ Rails.application.routes.draw do
   post "/auth/login", to: "authentication#login"
   resources :providers do 
     collection do 
-      get 'filter', to: 'providers#filter'
+      post 'filter', to: 'providers#filter'
     end 
   end
   resources :makers do
     collection do 
-      get 'filter', to: 'makers#filter'
+      post 'filter', to: 'makers#filter'
     end 
   end 
 
