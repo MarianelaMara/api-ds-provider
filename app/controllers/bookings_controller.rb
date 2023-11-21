@@ -23,14 +23,7 @@ class BookingsController < ApplicationController
       material_id = Material.find_by(name: material_name)
       quantity = params[:quantity]
       booking = Booking.new(provider_type: provider_type, provider_id: provider_id, start_date: start_date, end_date: end_date, material:  material_id, quantity: quantity, delivery_place: delivery_place)
-    end 
-
-    def delete
-       @p = Provisions.all
-       @p.each do |p|
-        p.destroy
-       end
-    end 
+    end   
   
     if booking.save     
       render_success({ Reserva: booking}, {}, CREATED)
@@ -38,6 +31,13 @@ class BookingsController < ApplicationController
       render_error("Error", booking.errors, INTERNAL_SERVER_ERROR)
     end
   end
+
+  def delete
+    @p = Provisions.all
+    @p.each do |p|
+     p.destroy
+    end
+ end
   
   end
   
