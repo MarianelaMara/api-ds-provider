@@ -10,7 +10,6 @@ export DATABASE_URL=$(echo $DATABASE_URL | sed -e 's/^postgres:/postgresql:/')
 
 EDITOR="mate --wait" bin/rails credentials:edit
 #if [[ $(rake database:needs_migration?) = "true" ]]; then
-rails db:reset
 if [[ $SETUP_DB = "true" ]]; then
   bundle exec rake db:create db:migrate db:seed
 fi
