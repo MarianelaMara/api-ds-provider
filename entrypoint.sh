@@ -11,7 +11,7 @@ export DATABASE_URL=$(echo $DATABASE_URL | sed -e 's/^postgres:/postgresql:/')
 EDITOR="mate --wait" bin/rails credentials:edit
 #if [[ $(rake database:needs_migration?) = "true" ]]; then
 if [[ $SETUP_DB = "true" ]]; then
-  bundle exec rake db:create db:migrate db:reset
+  bundle exec rake db:create db:migrate db:seed
 fi
 
 # Then exec the container's main process (what's set as CMD in the Dockerfile).
