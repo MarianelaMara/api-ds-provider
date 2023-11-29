@@ -16,10 +16,12 @@ Rails.application.routes.draw do
  
   resources :bookings do 
     collection do 
-      post "create_booking_maerial", to: "bookings#create_booking_maerial" 
-      post "crete_booking_maker", to: "bookings#crete_booking_maker" 
+      post "create_booking_material", to: "bookings#create_booking_material" 
+      post "create_booking_maker", to: "bookings#create_booking_maker" 
     end 
   end 
+
+  resources :provisions
 
   resources :fechas do
     get 'smallest_date', on: :member
