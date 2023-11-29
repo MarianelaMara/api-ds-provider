@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_20_180704) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_29_022125) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,6 +28,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_20_180704) do
     t.string "delivery_place"
     t.index ["material_id"], name: "index_bookings_on_material_id"
     t.index ["provider_type", "provider_id"], name: "index_bookings_on_provider"
+  end
+
+  create_table "fechas", force: :cascade do |t|
+    t.integer "bonita", null: false
+    t.text "arreglo", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "makers", force: :cascade do |t|

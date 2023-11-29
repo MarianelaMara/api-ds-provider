@@ -13,6 +13,16 @@ Rails.application.routes.draw do
       post 'filter', to: 'makers#filter'
     end 
   end 
+ 
+  resources :bookings do 
+    collection do 
+      post "create_booking_maerial", to: "bookings#create_booking_maerial" 
+      post "crete_booking_maker", to: "bookings#crete_booking_maker" 
+    end 
+  end 
 
-  resources :bookings
+  resources :fechas do
+    get 'smallest_date', on: :member
+  end
+
 end
