@@ -6,9 +6,8 @@ rm -f /app/tmp/pids/server.pid
 rm -f /config/master.key
 rm -f /config/credentials.yml.enc
 
-export DATABASE_URL=$(echo $DATABASE_URL | sed -e 's/^postgres:/postgresql:/')
-
 EDITOR="mate --wait" bin/rails credentials:edit
+
 #if [[ $(rake database:needs_migration?) = "true" ]]; then
 if [[ $SETUP_DB = "true" ]]; then
   bundle exec rake db:create db:migrate db:seed

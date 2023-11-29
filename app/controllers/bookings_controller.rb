@@ -10,7 +10,7 @@ class BookingsController < ApplicationController
     render_success({ Reserva: @bookings}, {})
   end 
 
-  def create_booking_material
+  def create_booking_maker
     provider_type = params[:provider_type].capitalize
     provider_id = params[:provider_id]
     start_date = params[:start_date]
@@ -23,7 +23,7 @@ class BookingsController < ApplicationController
     end 
   end   
 
-  def create_booking_maker
+  def create_booking_material
     @status = true
     @materials = params[:materials]
     @materials.each do |m|  

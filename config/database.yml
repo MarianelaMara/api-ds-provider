@@ -1,29 +1,20 @@
 default: &default
  adapter: postgresql
  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+ host: database
+ username: postgres
+ password: postgres
+ port: 5432
  timeout: 5000
 
 development:
   <<: *default
-  database: development_db
-  host: database
-  username: provider
-  password: qaWlC3hexA7pfXRSGXto3nbnBs3qkWyN
-  port: 5432
+  database: providers_db
 
 test:
   <<: *default
   database: test_db
-  host: database
-  username: provider
-  password: qaWlC3hexA7pfXRSGXto3nbnBs3qkWyN
-  port: 5432
 
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL']%>
- # database: provider_db # reemplaza esto con el nombre real de tu base de datos en Render
- # host: postgres://provider:qaWlC3hexA7pfXRSGXto3nbnBs3qkWyN@dpg-ckpfur8ujous73dhm8p0-a.oregon-postgres.render.com/provider_db # reemplaza esto con el nombre real de tu host externo en Render
- # username: provider # reemplaza esto con el nombre real de tu usuario en Render
- # password: qaWlC3hexA7pfXRSGXto3nbnBs3qkWyN # reemplaza esto con la contraseña real de tu base de datos en Render
- # port: 5432 # reemplaza esto con el puerto real de tu base de datos en Render
+  database: prod_db
