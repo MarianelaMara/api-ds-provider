@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-
+  require 'date' # requiere la librería de Date
   def index
     @bookings = Booking.all
     render_success({ Reservas: @bookings}, {})
@@ -8,6 +8,14 @@ class BookingsController < ApplicationController
   def show
     @bookings = Booking.find(params[:id])
     render_success({ Reserva: @bookings}, {})
+  end 
+  def destroy
+    @booking = Booking.find(params[:id])
+    if @booking.destroy
+      render_success()
+    else
+      render_error("Error", @booking.errors, INTERNAL_SERVER_ERROR)
+    end
   end 
 
   def create_booking_maker
@@ -45,7 +53,8 @@ class BookingsController < ApplicationController
       @hash["date"] = end_date
       @array.push(@hash) # agrega el hash al array
     end   
-    if @status      
+    if @status   
+      @array.sort_by! { |h| Date.parse(h["date"]) } # ordena el array por fecha   
       render_success(@array, {}, CREATED) # devuelve el array con el estado
     else
       render_error("Error", booking.errors, INTERNAL_SERVER_ERROR)
