@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_29_022125) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_30_215123) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,6 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_022125) do
     t.bigint "material_id"
     t.string "aasm_state"
     t.string "delivery_place"
+    t.integer "case_id"
     t.index ["material_id"], name: "index_bookings_on_material_id"
     t.index ["provider_type", "provider_id"], name: "index_bookings_on_provider"
   end

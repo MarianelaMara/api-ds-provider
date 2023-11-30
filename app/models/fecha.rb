@@ -1,5 +1,7 @@
 class Fecha < ApplicationRecord
 
+
+    validates_uniqueness_of :bonita
     validates :arreglo, presence: true
     before_save :ordenar_fechas
 
