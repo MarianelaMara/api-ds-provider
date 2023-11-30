@@ -61,6 +61,11 @@ class BookingsController < ApplicationController
     end
   end
 
+  def state 
+    options = ["continuar", "fallo", "termino"]
+    options.sample
+  end 
+
   
 
   #def create_booking_material

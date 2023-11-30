@@ -13,6 +13,9 @@ Rails.application.routes.draw do
       post 'filter', to: 'makers#filter'
     end 
   end 
+  get "/bookings/:id/state", to: "bookings#state"
+
+
  
   resources :bookings do 
     collection do 
