@@ -55,7 +55,7 @@ class BookingsController < ApplicationController
     end   
     if @status   
       @array.sort_by! { |h| Date.parse(h["date"]) } # ordena el array por fecha   
-      render_success(@array, {}, CREATED) # devuelve el array con el estado
+      render json: @array, status: CREATED
     else
       render_error("Error", booking.errors, INTERNAL_SERVER_ERROR)
     end
