@@ -19,6 +19,7 @@ class BookingsController < ApplicationController
   end 
 
   def create_booking_maker
+ 
     provider_type = params[:provider_type].capitalize
     provider_id = params[:provider_id]
     case_id = params[:case_id]
@@ -33,6 +34,7 @@ class BookingsController < ApplicationController
   end   
 
   def create_booking_material
+    
     @status = true
     @materials = params[:materials]
     @array = [] # crea un array vacío
@@ -46,7 +48,7 @@ class BookingsController < ApplicationController
       material_name = m[:material].downcase
       material_id = Material.find_by(name: material_name)
       quantity = m[:quantity]
-      booking = Booking.new(provider_type: provider_type, provider_id: provider_id, start_date: start_date, end_date: end_date, material: material_id, quantity: quantity, delivery_place: delivery_place)   
+      booking = Booking.new(case_id: case_id, provider_type: provider_type, provider_id: provider_id, start_date: start_date, end_date: end_date, material: material_id, quantity: quantity, delivery_place: delivery_place)   
       @status = false  unless booking.save
       @hash = {} # crea un hash vacío
       @hash["booking_id"] = booking.id
@@ -66,6 +68,14 @@ class BookingsController < ApplicationController
     res = @booking.aasm_state
     render json: res, status: OK
   end 
+  def get_first_booking 
+    @booking = Booking.where(case_id: params[:id]).order(:end_date).first 
+    if @booking 
+      render json: @booking, status: OK 
+    else 
+      render json: { message: "No hay más reservas para este caso" }, status: 404 
+    end 
+  end
 
   def delete
     @p = Provision.all
@@ -84,6 +94,7 @@ class BookingsController < ApplicationController
   elsif state == "cancel"
     @booking.cancel
  end 
+ render json: @booking, status: OK 
 end 
   
 end
