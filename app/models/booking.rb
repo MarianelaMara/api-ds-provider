@@ -32,7 +32,17 @@ class Booking < ApplicationRecord
   before_save :assign_price
   before_save :update_stock, if: -> { provider_type == 'Provider' }
 
-  
+  def finish
+    self.finish! if self.aasm_state == "pending" || self.aasm_state == "delayed"
+  end 
+
+  def delay
+    self.delay! if self.aasm_state == "pending" 
+  end 
+
+  def cancel
+    self.cancel! if self.aasm_state == "pending" || self.aasm_state == "delayed"
+  end 
   private
 
   def assign_price

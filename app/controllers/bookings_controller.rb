@@ -61,20 +61,30 @@ class BookingsController < ApplicationController
     end
   end
 
-  def state_boocking
-
-  def state 
-    options = ["continuar", "fallo", "termino"]
-    res = options.sample
+  def state
+    @booking = Booking.find(params[:id])
+    res = @booking.aasm_state
     render json: res, status: OK
   end 
 
   def delete
-    @p = Provisions.all
+    @p = Provision.all
     @p.each do |p|
      p.destroy
     end
- end
-  
   end
+
+ def channge_state
+  @booking = Booking.find(params[:id])
+  state = params[:state]
+  if state == "finish" 
+    @booking.finish
+  elsif state == "delay"
+    @booking.delayed
+  elsif state == "cancel"
+    @booking.cancel
+ end 
+end 
+  
+end
   

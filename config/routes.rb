@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     end 
   end 
   get "/bookings/:id/state", to: "bookings#state"
+  patch "/bookings/:id/channge_state", to: "bookings#channge_state"
 
 
  
