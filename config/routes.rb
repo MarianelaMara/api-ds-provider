@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       post 'filter', to: 'makers#filter'
     end 
   end 
-  get "/bookings/:id/get_first_booking", to: "bookings#get_first_booking"
+  get "/get_first_booking", to: "bookings#get_first_booking"
   get "/bookings/:id/state", to: "bookings#state"
   patch "/bookings/:id/channge_state", to: "bookings#channge_state"
  
