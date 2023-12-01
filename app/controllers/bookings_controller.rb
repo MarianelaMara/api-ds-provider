@@ -69,7 +69,7 @@ class BookingsController < ApplicationController
     render json: res, status: OK
   end 
   def get_first_booking 
-    @booking = Booking.where(case_id: params[:case_id]).order(:end_date).first 
+    @booking = Booking.where(case_id: params[:case_id], provider_type: "Provider").order(:end_date).first 
     if @booking 
       render json: @booking, status: OK 
     else 
