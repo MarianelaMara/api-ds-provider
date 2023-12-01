@@ -49,7 +49,7 @@ class BookingsController < ApplicationController
       booking = Booking.new(provider_type: provider_type, provider_id: provider_id, start_date: start_date, end_date: end_date, material: material_id, quantity: quantity, delivery_place: delivery_place)   
       @status = false  unless booking.save
       @hash = {} # crea un hash vacío
-      @hash["case_id"] = case_id
+      @hash["booking_id"] = booking.id
       @hash["date"] = end_date
       @array.push(@hash) # agrega el hash al array
     end   
@@ -60,6 +60,8 @@ class BookingsController < ApplicationController
       render_error("Error", booking.errors, INTERNAL_SERVER_ERROR)
     end
   end
+
+  def state_boocking
 
   def state 
     options = ["continuar", "fallo", "termino"]
