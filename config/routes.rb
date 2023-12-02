@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       post 'filter', to: 'makers#filter'
     end 
   end 
+  post "fechas/smallest_date", to: "fechas#smallest_date"
   post "/get_first_booking", to: "bookings#get_first_booking"
   get "/bookings/:id/state", to: "bookings#state"
   patch "/bookings/:id/channge_state", to: "bookings#channge_state"
@@ -26,8 +27,5 @@ Rails.application.routes.draw do
 
   resources :provisions
 
-  resources :fechas do
-    get 'smallest_date', on: :member
-  end
 
 end

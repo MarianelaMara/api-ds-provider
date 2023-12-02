@@ -6,14 +6,14 @@ class Fecha < ApplicationRecord
     before_save :ordenar_fechas
 
     def pop_smallest_date
-        self.arreglo.sort_by! { |fecha| Date.parse(fecha) }
+        self.arreglo.sort_by! { |fecha| DateTime.parse(fecha) }
         self.arreglo.shift
     end
   
     private
   
     def ordenar_fechas
-      self.arreglo = self.arreglo.sort_by { |fecha| Date.parse(fecha) }
+      self.arreglo = self.arreglo.sort_by { |fecha| DateTime.parse(fecha) } 
     end
 end
   

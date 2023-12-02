@@ -50,14 +50,13 @@ class BookingsController < ApplicationController
       quantity = m[:quantity]
       booking = Booking.new(case_id: case_id, provider_type: provider_type, provider_id: provider_id, start_date: start_date, end_date: end_date, material: material_id, quantity: quantity, delivery_place: delivery_place)   
       @status = false  unless booking.save
-      @hash = {} # crea un hash vacío
-      @hash["booking_id"] = booking.id
-      @hash["date"] = end_date
-      @array.push(@hash) # agrega el hash al array
     end   
-    if @status   
-      @array.sort_by! { |h| Date.parse(h["date"]) } # ordena el array por fecha   
-      render json: @array, status: CREATED
+    case_id = @materials.first[:case_id]
+    end_dates = @materials.map { |m| m[:end_date] }
+    fecha = Fecha.new(bonita: case_id, arreglo: end_dates)
+    fecha.save
+    if @status    
+      render json: fecha, status: CREATED
     else
       render_error("Error", booking.errors, INTERNAL_SERVER_ERROR)
     end

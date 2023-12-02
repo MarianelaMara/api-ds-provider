@@ -15,14 +15,14 @@ class FechasController < ApplicationController
     end
 
     def smallest_date
-        @fecha = Fecha.find_by(bonita: params[:id])
+        @fecha = Fecha.find_by(bonita: params[:case_id])
         @smallest_date = @fecha.pop_smallest_date
         if @fecha.save
             render_success({smallest_date: @smallest_date}, {}, OK)
         else
-            render_error("Error", @fecha.errors, UNPROCESSABLE_ENTITY)
+            render_error("Error", "No hay mas fechas ", NOT_FOUND)
         end
-      end
+    end
 
     private
   
