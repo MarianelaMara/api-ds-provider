@@ -96,12 +96,24 @@ class BookingsController < ApplicationController
   state = params[:state]
   if state == "finish" 
     @booking.finish
-  elsif state == "delay"
-    @booking.delayed
   elsif state == "cancel"
     @booking.cancel
  end 
  render json: @booking, status: OK 
+end 
+
+def delayed
+  @booking = Booking.find(params[:id])
+  @booking.end_date = params[:new_date]
+  @booking.delay
+  @booking.save
+  @fechas = Fecha.find_by(bonita: @booking.case_id)
+  @fechas.arreglo << params[:new_date] 
+  if @fechas.save
+    render json: "se modifico la fecha de la reserva", status: OK 
+  else 
+    render json: { message: "No se pudo modificar la fecha de la reserva " }, status: 404 
+  end 
 end 
   
 end

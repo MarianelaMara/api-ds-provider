@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     end 
   end 
   
+  post "/bookings/:id/delayed", to: "bookings#delayed"
   post "/bookings/delete_all", to: "bookings#delete_all"
   post "/get_first_booking", to: "bookings#get_first_booking"
   get "/bookings/:id/state", to: "bookings#state"
