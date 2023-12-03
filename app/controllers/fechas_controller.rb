@@ -18,9 +18,9 @@ class FechasController < ApplicationController
         @fecha = Fecha.find_by(bonita: params[:case_id])
         @smallest_date = @fecha.pop_smallest_date
         if @fecha.save
-            render_success({smallest_date: @smallest_date}, {}, OK)
+            render json: @smallest_date, status: OK
         else
-            render_error("Error", "No hay mas fechas ", NOT_FOUND)
+            render json: "no hay mas fechas", status: NOT_FOUND
         end
     end
 
