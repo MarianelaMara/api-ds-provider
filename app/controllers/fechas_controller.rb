@@ -19,17 +19,18 @@ class FechasController < ApplicationController
             render_error("Error", @fecha.errors, INTERNAL_SERVER_ERROR)
         end
     end
-
-    def smallest_date
-        @fecha = Fecha.find_by(bonita: params[:case_id])
-        @smallest_date = @fecha.pop_smallest_date
-        @fecha.save
-        if !@smallest_date.nil?
-            render json: @smallest_date, status: OK
-        else
-            render json: "no hay mas fechas", status: NOT_FOUND
-        end
-    end
+  
+   def smallest_date 
+    @fecha = Fecha.find_by(bonita: params[:case_id]) 
+    @smallest_date = @fecha.arreglo.first # solo devuelve la primera fecha sin eliminarla 
+    if @smallest_date # verifica si hay una fecha válida 
+        @fecha.arreglo.delete_at(0) # elimina la primera fecha del arreglo 
+        @fecha.save # guarda el cambio en el arreglo 
+        render json: @smallest_date, status: OK 
+    else # si no hay una fecha válida 
+        render json: "no hay más fechas", status: NOT_FOUND 
+    end 
+end
 
     private
   
