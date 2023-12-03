@@ -27,5 +27,5 @@ Rails.application.routes.draw do
 
   resources :provisions
 
-
+  resources :fechas
 end
