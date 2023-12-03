@@ -5,6 +5,12 @@ class FechasController < ApplicationController
         render_success({fechas:@fechas}, {}, OK)
     end 
 
+    def delete_all
+       if  Fecha.destroy_all
+        render_success({}, {}, OK)
+       end 
+    end 
+
     def create
         @fecha = Fecha.new(fecha_params)
         if @fecha.save
@@ -17,7 +23,8 @@ class FechasController < ApplicationController
     def smallest_date
         @fecha = Fecha.find_by(bonita: params[:case_id])
         @smallest_date = @fecha.pop_smallest_date
-        if @fecha.save
+        @fecha.save
+        if !@smallest_date.nil?
             render json: @smallest_date, status: OK
         else
             render json: "no hay mas fechas", status: NOT_FOUND

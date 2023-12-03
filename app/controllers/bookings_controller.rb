@@ -76,6 +76,14 @@ class BookingsController < ApplicationController
     end 
   end
 
+  def delete_all
+   if Booking.destroy_all
+    render json: "se eliminaron todas las reservas ", status: OK 
+    else 
+      render json: { message: "No se pudieron eliminar todas las reservas " }, status: 404 
+    end 
+  end 
+
   def delete
     @p = Provision.all
     @p.each do |p|
