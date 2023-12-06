@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     collection do 
       post "create_booking_material", to: "bookings#create_booking_material" 
       post "create_booking_maker", to: "bookings#create_booking_maker" 
+      post "add_booking_material", to: "bookings#add_booking_material" 
     end 
   end 
 

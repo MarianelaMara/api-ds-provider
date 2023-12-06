@@ -43,6 +43,17 @@ class Booking < ApplicationRecord
   def cancel
     self.cancel! if self.aasm_state == "pending" || self.aasm_state == "delayed"
   end 
+
+  def as_json(options = {})
+    # Llama al método super con los mismos parámetros, pero agregando el nombre del material
+    super(options.merge(methods: :material_name))
+  end
+
+  # Define un método que devuelve el nombre del material asociado a la provisión
+  def material_name
+    self.material.name
+  end
+
   private
 
   def assign_price
@@ -74,5 +85,6 @@ class Booking < ApplicationRecord
     end
   end
 
+ 
   
   end

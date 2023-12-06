@@ -33,8 +33,7 @@ class BookingsController < ApplicationController
     end 
   end   
 
-  def create_booking_material
-    
+  def create_booking_material    
     @status = true
     @materials = params[:materials]
     @array = [] # crea un array vacío
@@ -48,7 +47,8 @@ class BookingsController < ApplicationController
       material_name = m[:material].downcase
       material_id = Material.find_by(name: material_name)
       quantity = m[:quantity]
-      booking = Booking.new(case_id: case_id, provider_type: provider_type, provider_id: provider_id, start_date: start_date, end_date: end_date, material: material_id, quantity: quantity, delivery_place: delivery_place)   
+      delivery_time = m[:delivery_time]
+      booking = Booking.new(delivery_time: delivery_time, case_id: case_id, provider_type: provider_type, provider_id: provider_id, start_date: start_date, end_date: end_date, material: material_id, quantity: quantity, delivery_place: delivery_place)   
       @status = false  unless booking.save
     end   
     case_id = @materials.first[:case_id]
@@ -61,6 +61,31 @@ class BookingsController < ApplicationController
       render_error("Error", booking.errors, INTERNAL_SERVER_ERROR)
     end
   end
+  def add_booking_material  
+    @material =  params[:materials].first
+    provider_type =  @material[:provider_type].capitalize
+    provider_id = @material[:provider_id]
+    case_id = @material[:case_id]
+    start_date = @material[:start_date]
+    end_date = @material[:end_date]
+    delivery_place = @material[:delivery_place].downcase.strip
+    material_name = @material[:material].downcase
+    material_id = Material.find_by(name: material_name)
+    quantity = @material[:quantity]
+    delivery_time = @material[:delivery_time]
+    booking = Booking.new(delivery_time: delivery_time, case_id: case_id, provider_type: provider_type, provider_id: provider_id, start_date: start_date, end_date: end_date, material: material_id, quantity: quantity, delivery_place: delivery_place)   
+    case_id =  @material[:case_id]
+    @fecha = Fecha.find_by(bonita: case_id )
+    @fecha.arreglo <<  @material[:end_date]     
+    @fecha.save
+
+    if booking.save  
+      render json: @fecha, status: CREATED
+    else
+      render_error("Error", booking.errors, INTERNAL_SERVER_ERROR)
+    end
+  end
+
 
   def state
     @booking = Booking.find(params[:id])
